@@ -8,24 +8,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/share.module';
 import { CoreModule } from './core.module';
 import { LoggingService } from './logging.service';
+import { EffectsModule } from '@ngrx/effects';
 
 import { StoreModule } from '@ngrx/store';
 import * as fromApp from './store/app.reducer';
+import { AuthEffects } from './auth/store/auth.effects';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent
-  ],
+  declarations: [AppComponent, HeaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
     CoreModule,
-    StoreModule.forRoot(fromApp.appReducer)
+    StoreModule.forRoot(fromApp.appReducer),
+    EffectsModule.forRoot([AuthEffects]),
   ],
   bootstrap: [AppComponent],
-  providers: [LoggingService]
+  providers: [LoggingService],
 })
-export class AppModule { }
+export class AppModule {}
